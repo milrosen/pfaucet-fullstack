@@ -1,7 +1,7 @@
 <script lang="ts">
 	import PocketBase from 'pocketbase';
 
-	const pb = new PocketBase('http://127.0.0.1:8090');
+	const pb = new PocketBase('http://20.104.150.163:8090');
 
 	async function startPocketBase() {
 		const result = await pb.collection('test').getFullList();
