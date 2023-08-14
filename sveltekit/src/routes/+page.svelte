@@ -1,7 +1,12 @@
 <script lang="ts">
 	import PocketBase from 'pocketbase';
+	import { PUBLIC_DEV_DATABASE_IP, PUBLIC_PROD_DATABASE_IP } from '$env/static/public';
 
-	const pb = new PocketBase('http://20.104.150.163:8090');
+	const pb = new PocketBase(
+		`http://${
+			import.meta.env.MODE == 'production' ? PUBLIC_PROD_DATABASE_IP : PUBLIC_DEV_DATABASE_IP
+		}:8090`
+	);
 
 	async function startPocketBase() {
 		const result = await pb.collection('test').getFullList();
