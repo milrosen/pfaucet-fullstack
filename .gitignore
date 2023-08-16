@@ -9,4 +9,6 @@
 **/vite.config.js.timestamp-*
 **/vite.config.ts.timestamp-*
 /_SSL
+/pocketdb/data
+
 
