@@ -1,0 +1,16 @@
+{
+	email milton.rosenbaum@mcgill.mcgill.ca
+}
+
+pfaucet.canadaeast.azurecontainer.io {
+	reverse_proxy http://localhost:8080
+}
+
+pfaucet.canadaeast.azurecontainer.io:8091 {
+	reverse_proxy http://localhost:8090
+}
+
+plumbersfaucet.ca {
+	reverse_proxy http://localhost:8080
+}
+

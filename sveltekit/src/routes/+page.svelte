@@ -4,7 +4,7 @@
 
 	const db_ip = import.meta.env.PROD ? PUBLIC_DATABASE_IP : 'localhost';
 
-	const pb = new PocketBase(`http://${db_ip}:8090`);
+	const pb = new PocketBase(db_ip);
 
 	async function startPocketBase() {
 		const result = await pb.collection('test').getFullList();
