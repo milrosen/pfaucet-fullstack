@@ -8,5 +8,6 @@
 !.env.example
 **/vite.config.js.timestamp-*
 **/vite.config.ts.timestamp-*
+**/pocketdb/data
 /_SSL
 
