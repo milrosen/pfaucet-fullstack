@@ -9,6 +9,8 @@
 		return result[0].test_field;
 	}
 
+	console.log(PUBLIC_DATABASE_IP);
+
 	let data = startPocketBase();
 </script>
 
