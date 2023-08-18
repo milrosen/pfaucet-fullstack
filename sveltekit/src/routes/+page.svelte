@@ -2,9 +2,7 @@
 	import PocketBase from 'pocketbase';
 	import { PUBLIC_DATABASE_IP } from '$env/static/public';
 
-	const db_ip = import.meta.env.PROD ? PUBLIC_DATABASE_IP : 'localhost';
-
-	const pb = new PocketBase(db_ip);
+	const pb = new PocketBase(PUBLIC_DATABASE_IP);
 
 	async function startPocketBase() {
 		const result = await pb.collection('test').getFullList();
