@@ -1,13 +1,4 @@
 services:
-  sveltekit:
-    env_file:
-      - .env.development
-    build:
-      context: ./sveltekit
-      args:
-        - PUBLIC_DATABASE_IP=${PUBLIC_DATABASE_IP}
-    ports:
-      - 8080:8080
   pocketbase:
     build: ./pocketbase
     ports:
