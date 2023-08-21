@@ -4,6 +4,7 @@ import {
 } from '$env/dynamic/private';
 
 const pb = new PocketBase(env.DATABASE_IP);
+pb.collection('users').authWithPassword(env.PB_USERNAME, env.PB_PASSWORD);
 
 async function startPocketBase() {
 	const result = await pb.collection('test').getFullList();
