@@ -5,14 +5,14 @@ services:
     build: ./sveltekit
     image: pfaucet.azurecr.io/containergroup:sveltekit_frontend
     env_file:
-      - ./sveltekit/.env
+      - ./.env.production
     ports:
       - 8080:8080
     networks:
       - caddy
     domainname: "pfaucet"
   pocketbase:
-    build: ./pocketdb
+    build: ./pocketbase
     image: pfaucet.azurecr.io/containergroup:pocketbase_backend
     ports:
       - 8090:8090
@@ -37,12 +37,12 @@ volumes:
   caddy-data:
     driver: azure_file
     driver_opts:
-      share_name: caddydata
+      share_name: data
       storage_account_name: caddystorageaccount
   caddy-config:
     driver: azure_file
     driver_opts:
-      share_name: caddyconfig
+      share_name: config
       storage_account_name: caddystorageaccount
   caddy-caddyfile:
     driver: azure_file

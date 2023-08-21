@@ -1,12 +1,9 @@
 import PocketBase from 'pocketbase';
-import {
-	PUBLIC_DATABASE_IP
-} from '$env/static/public';
-
-const pb = new PocketBase(PUBLIC_DATABASE_IP);
+const pb = new PocketBase(process.env.PUBLIC_DATABASE_IP);
 
 async function startPocketBase() {
 	const result = await pb.collection('test').getFullList();
+	console.log(result[0].test_field);
 	return result[0].test_field;
 }
 

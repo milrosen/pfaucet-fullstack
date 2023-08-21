@@ -10,6 +10,6 @@
 **/vite.config.ts.timestamp-*
 **/pocketdb/data
 /_SSL
-/pocketdb/data
+**/pocketbase/data
 
 

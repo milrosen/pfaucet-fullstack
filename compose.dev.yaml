@@ -1,39 +1,16 @@
-# networks:
-#   caddy:
 services:
-  # sveltekit:
-  #   build: ./sveltekit
-  #   env_file:
-  #     - ./sveltekit/.env.development
-  #   ports:
-  #     - 8080:8080
-  #   networks:
-  #     - caddy
-  #   domainname: "pfaucet.dev"
+  sveltekit:
+    env_file:
+      - .env.development
+    build:
+      context: ./sveltekit
+      args:
+        - PUBLIC_DATABASE_IP=${PUBLIC_DATABASE_IP}
+    ports:
+      - 8080:8080
   pocketbase:
-    build: ./pocketdb
+    build: ./pocketbase
     ports:
       - 8090:8090
     volumes:
-      - ./pocketdb/data:/app/data
-  #   networks:
-  #     - caddy
-  # caddy: 
-  #   image: caddy:latest
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #     - 8091:8091
-  #   volumes:
-  #     - ./caddy/dev.Caddyfile:/etc/caddy/Caddyfile
-  #     - ./caddy/site:/srv
-  #     - ./caddy/caddy_data:/data
-  #     - ./caddy/caddy_config:/config
-  #   networks:
-  #     - caddy
-  #   domainname: "pfaucet.dev"
-volumes:
-  # caddy_data:
-  #   external: true
-  # caddy_config:
-  pocketbase-volume:
+      - ./pocketbase/data:/app/data
