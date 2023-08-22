@@ -1,6 +1,6 @@
 <script>
 	import Card from '$lib/components/Card.svelte';
-	import ArticleCard from '$lib/components/ArticleCard.svelte';
+	import BigCard from '$lib/components/BigCard.svelte';
 	import Longcard from '$lib/components/Longcard.svelte';
 
 	/** @type {import('./$types').PageData} */
@@ -77,7 +77,7 @@
 
 <div class="articles-grid">
 	{#each cards as card (card.id)}
-		{#if card.id == 1} <ArticleCard {card} />{/if}
+		{#if card.id == 1} <BigCard {card} />{/if}
 		{#if card.id == 2 || card.id == 3} <Longcard {card} />{/if}
 		{#if card.id >= 4} <Card {card} />{/if}
 	{/each}

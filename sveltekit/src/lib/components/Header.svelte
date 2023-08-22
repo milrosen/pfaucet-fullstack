@@ -1,6 +1,6 @@
 <script>
-	import Link from '../components/link.svelte';
-	import Complaints from '../components/complaints.svelte';
+	import Link from '$lib/components/Link.svelte';
+	import Complaints from '$lib/components/Complaints.svelte';
 	let currentAnim = ' ';
 </script>
 
