@@ -29,5 +29,6 @@
 **/values.dev.yaml
 **/build
 **/dist
+**/pocketbase/data
 LICENSE
 README.md

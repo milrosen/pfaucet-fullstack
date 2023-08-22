@@ -37,12 +37,12 @@ volumes:
   caddy-data:
     driver: azure_file
     driver_opts:
-      share_name: data
+      share_name: caddydata
       storage_account_name: caddystorageaccount
   caddy-config:
     driver: azure_file
     driver_opts:
-      share_name: config
+      share_name: caddyconfig
       storage_account_name: caddystorageaccount
   caddy-caddyfile:
     driver: azure_file
@@ -52,5 +52,5 @@ volumes:
   pocketbase-volume:
     driver: azure_file
     driver_opts:
-      share_name: pffileshare
+      share_name: pocketbase-data
       storage_account_name: pfstorageaccount

@@ -1,5 +1,5 @@
 services:
-  pocketbase:
+  pocketbase_dev:
     build: ./pocketbase
     ports:
       - 8090:8090
