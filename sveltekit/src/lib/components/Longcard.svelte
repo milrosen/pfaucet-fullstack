@@ -33,6 +33,7 @@
 		background-color: var(--cream);
 	}
 	p {
+		font-family: 'dimbo';
 		margin: 0;
 		margin-bottom: 0.5rem;
 		padding: 0px 5px;

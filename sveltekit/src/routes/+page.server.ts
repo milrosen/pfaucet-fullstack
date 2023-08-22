@@ -8,11 +8,11 @@ pb.collection('users').authWithPassword(env.PB_USERNAME, env.PB_PASSWORD);
 
 async function startPocketBase() {
 	const result = await pb.collection('test').getFullList();
-	return result[0].test_field;
+	return result[0]?.test_field;
 }
 
 /** @type {import('./$types').PageServerLoad} */
-export function load() {
+export async function load() {
 	return {
 		post: startPocketBase()
 	};

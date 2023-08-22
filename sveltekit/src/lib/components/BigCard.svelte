@@ -37,6 +37,7 @@
 		background-color: var(--cream);
 	}
 	p {
+		font-family: 'dimbo';
 		display: block;
 		margin: 0;
 		padding: 0px 10px;
