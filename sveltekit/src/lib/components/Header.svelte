@@ -35,9 +35,9 @@
 
 	<div class="button-container">
 		<Complaints />
-		<Link href={''} span={'Home'} />
+		<Link href={'/'} span={'Home'} />
 		<Link href={''} span={'Contact'} />
-		<Link href={''} span={'Issues'} />
+		<Link href={'/issues'} span={'Issues'} />
 	</div>
 </div>
 

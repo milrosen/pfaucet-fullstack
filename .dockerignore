@@ -30,5 +30,6 @@
 **/build
 **/dist
 **/pocketbase/data
+**/scripts
 LICENSE
 README.md

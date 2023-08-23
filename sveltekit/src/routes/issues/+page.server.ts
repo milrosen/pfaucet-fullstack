@@ -1,8 +1,10 @@
-import { get_db_test } from "$lib/server/api";
+import { get_issues_range } from "$lib/server/api";
+
+
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
 	return {
-		post: get_db_test()
+		newest_issue: get_issues_range(0, 1),
 	};
 }

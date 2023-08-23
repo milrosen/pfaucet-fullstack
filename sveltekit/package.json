@@ -29,6 +29,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"form-data": "^4.0.0",
 		"pocketbase": "^0.15.2"
 	}
 }
