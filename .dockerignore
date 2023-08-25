@@ -25,6 +25,8 @@
 **/node_modules
 **/npm-debug.log
 **/obj
+**/vite.config.js.timestamp-*
+**/vite.config.ts.timestamp-*
 **/secrets.dev.yaml
 **/values.dev.yaml
 **/build
