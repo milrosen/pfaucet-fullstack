@@ -1,9 +1,10 @@
 <script lang="ts">
 	export let span: string;
 	export let href: string;
+	export let onClick = (e: Event) => {};
 </script>
 
-<a {href}>
+<a {href} on:click={onClick}>
 	<span>{span}</span>
 </a>
 
@@ -24,6 +25,7 @@
 	}
 	span {
 		padding: 20px;
+		width: 100%;
 	}
 	span::after {
 		content: '';

@@ -21,7 +21,7 @@
 	</div>
 	<div class="issues-grid">
 		{#each issues as issue}
-			<a class="issue" href={issue.pdf}>
+			<a class="issue" href={issue.pdf} target="_blank">
 				<div>
 					<img src={issue.thumbnail} alt={issue.title} class="issue-img" />
 				</div>
