@@ -15,6 +15,7 @@ const format_articles = (raw_articles: ListResult<Record>) => {
 			paragraph: article.paragraph,
 			content: article.content,
 			date: article.date,
+			authors: article.authors,
 		})
 	});
 
@@ -46,8 +47,8 @@ const pb = new PocketBase(env.DATABASE_IP);
 export const db_ip = env.DATABASE_IP;
 
 export async function get_articles(n: number) {
-	const result = await pb.collection('articles').getList(1, n, {
-		sort: '-date',
+	const result = await pb.collection('articles').getList(0, n, {
+		sort: '-authors',
 	});
 	return format_articles(result);
 }
@@ -66,17 +67,17 @@ export async function get_issues(first: number, last: number) {
 }
 
 export async function get_all_issues() {
-	const result = await pb.collection('issues').getList(0, 72, {
+	const result = await pb.collection('issues_content').getList(0, 72, {
 		sort: '-date',
 	});
 	return format_issues(result);
 }
 
 export async function get_issue_by_id(id: string) {
-	const result = await pb.collection('issues').getOne(id);
+	const result = await pb.collection('issues_content').getOne(id);
 	return format_issue(result);
 }
 
 export async function get_first_issue() {
-	return await pb.collection('isses_metadata').getFirstListItem('special = \'firstIssue\'');
+	return await pb.collection('issues').getFirstListItem('special = \'firstIssue\'');
 }

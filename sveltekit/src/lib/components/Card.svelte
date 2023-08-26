@@ -1,23 +1,15 @@
 <script lang="ts">
-	export let card: {
-		imageUrl: string;
-		title: string;
-		blurb: string;
-		author: string;
-		link: string;
-	};
-
-	$: ({ imageUrl, title, blurb, author, link } = card);
+	export let card: Article;
 </script>
 
 <div class="card">
-	<a href={link}>
-		<p>{title}</p>
-		<p2>{blurb}</p2>
-		<p3>{author}</p3>
+	<a href={''}>
+		<p>{card.title}</p>
+		<p2>{card.blurb}</p2>
+		<p3>{card.authors.split(',')}</p3>
 	</a>
 	<div class="bg">
-		<img src={imageUrl} alt={title} />
+		<img src={card.thumbnail} alt={card.title} />
 	</div>
 </div>
 

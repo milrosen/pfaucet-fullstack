@@ -1,25 +1,16 @@
 <script lang="ts">
-	export let card: {
-		imageUrl: string;
-		title: string;
-		blurb: string;
-		author: string;
-		link: string;
-		paragraph?: string | undefined;
-	};
-
-	$: ({ imageUrl, title, blurb, author, link, paragraph } = card);
+	export let card: Article;
 </script>
 
 <div class="big-card">
-	<a href={link}>
-		<p>{title}</p>
-		<p2>{blurb}</p2>
-		<p4>{paragraph}</p4>
-		<p3>{author}</p3>
+	<a href={''}>
+		<p>{card.title}</p>
+		<p2>{card.blurb}</p2>
+		<p4>{card.paragraph}</p4>
+		<p3>{card.authors}</p3>
 	</a>
 	<div class="bg">
-		<img src={imageUrl} alt={title} />
+		<img src={card.thumbnail} alt={card.title} />
 	</div>
 </div>
 
@@ -39,9 +30,10 @@
 	p {
 		font-family: 'dimbo';
 		display: block;
-		margin: 0;
+		margin: 0.5em;
+		text-align: center;
 		padding: 0px 10px;
-		transform: translateY(-20px);
+		transform: translateY(-5px);
 		background-color: var(--cream);
 		text-transform: uppercase;
 		font-size: 4.5vmax;
