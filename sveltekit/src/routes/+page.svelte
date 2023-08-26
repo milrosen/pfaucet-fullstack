@@ -86,17 +86,6 @@
 <h1>{data.post}</h1>
 
 <style>
-	:root {
-		--black: #282a28;
-		--cream: #fff;
-		--red: #e64042;
-	}
-
-	:global(body) {
-		background-color: var(--cream);
-		margin-top: 0;
-	}
-
 	.articles-grid {
 		display: grid;
 		gap: 2px;
