@@ -7,20 +7,25 @@ const format_articles = (raw_articles: ListResult<Record>) => {
 	let formatted_articles: Article[] = [];
 
 	raw_articles.items.forEach(article => {
-		formatted_articles.push({
-			title: article.title,
-			thumbnail: `${db_ip}/api/files/${article.collectionName}/${article.id}/${article.thumbnail}`,
-			link: '',
-			blurb: article.blurb,
-			paragraph: article.paragraph,
-			content: article.content,
-			date: article.date,
-			authors: article.authors,
-		})
+		formatted_articles.push(format_article(article));
 	});
 
 	return formatted_articles;
 }
+
+const format_article = (article: Record) => {
+	return {
+		title: article.title,
+		thumbnail: `${db_ip}/api/files/${article.collectionName}/${article.id}/${article.thumbnail}`,
+		link: `articles/${article.id}`,
+		blurb: article.blurb,
+		paragraph: article.paragraph,
+		content: article.content,
+		date: article.date,
+		authors: article.authors,
+	}
+}
+
 
 const format_issues = (raw_issues: ListResult<Record>) => {
 	let formatted_issues: Issue[] = [];
@@ -45,6 +50,11 @@ const pb = new PocketBase(env.DATABASE_IP);
 //pb.collection('users').authWithPassword(env.PB_USERNAME, env.PB_PASSWORD);
 
 export const db_ip = env.DATABASE_IP;
+
+export const get_article_json = async(id: string) => {
+	const record = await pb.collection('articles_content').getOne(id);
+	return record.content;
+} 
 
 export async function get_articles(n: number) {
 	const result = await pb.collection('articles').getList(0, n, {
@@ -76,6 +86,11 @@ export async function get_all_issues() {
 export async function get_issue_by_id(id: string) {
 	const result = await pb.collection('issues_content').getOne(id);
 	return format_issue(result);
+}
+
+export async function get_article_by_id(id: string) {
+	const result = await pb.collection('articles').getOne(id);
+	return format_article(result);
 }
 
 export async function get_first_issue() {

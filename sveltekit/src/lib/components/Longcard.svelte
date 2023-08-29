@@ -3,7 +3,7 @@
 </script>
 
 <div class="long-card">
-	<a href={''}>
+	<a href={card.link}>
 		<p>{card.title}</p>
 		<p2>{card.blurb}</p2>
 		<p3>{card.authors}</p3>

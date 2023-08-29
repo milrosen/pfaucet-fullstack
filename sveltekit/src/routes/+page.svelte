@@ -7,7 +7,6 @@
 	export let data;
 
 	const cards = data.articles;
-	console.log(cards);
 </script>
 
 <div class="articles-grid">
