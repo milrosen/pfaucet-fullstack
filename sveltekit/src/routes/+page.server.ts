@@ -7,7 +7,6 @@ export async function load() {
 	let staff = await get_staff();
 
 	return {
-		post: get_db_test(),
 		articles: articles,
 		staff: staff
 	};

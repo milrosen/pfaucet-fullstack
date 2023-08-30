@@ -1,10 +1,12 @@
 <script lang="ts">
 	import Header from '$lib/components/Header.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 </script>
 
 <Header />
 <div class="under-construction">Under Construction</div>
 <slot />
+<Footer />
 
 <style>
 	.under-construction {

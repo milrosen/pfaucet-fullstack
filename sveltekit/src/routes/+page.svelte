@@ -24,8 +24,6 @@
 	{/each}
 </div>
 
-<h1>{data.post}</h1>
-
 <style>
 	.articles-grid {
 		display: grid;
