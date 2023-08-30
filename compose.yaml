@@ -3,7 +3,7 @@ networks:
 services:
   sveltekit:
     build: ./sveltekit
-    image: pfaucet.azurecr.io/containergroup:sveltekit_frontend
+    image: pfaucet.azurecr.io/containergroup:latest
     env_file:
       - ./.env.production
     ports:
@@ -37,12 +37,12 @@ volumes:
   caddy-data:
     driver: azure_file
     driver_opts:
-      share_name: caddydata
+      share_name: datacaddy
       storage_account_name: caddystorageaccount
   caddy-config:
     driver: azure_file
     driver_opts:
-      share_name: caddyconfig
+      share_name: configcaddy
       storage_account_name: caddystorageaccount
   caddy-caddyfile:
     driver: azure_file
@@ -52,5 +52,5 @@ volumes:
   pocketbase-volume:
     driver: azure_file
     driver_opts:
-      share_name: pocketbase-data
+      share_name: datapocketbase
       storage_account_name: pfstorageaccount

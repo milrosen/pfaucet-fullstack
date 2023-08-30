@@ -12,5 +12,6 @@
 **/scripts
 /_SSL
 **/pocketbase/data
+output.yaml
 
 

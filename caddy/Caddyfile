@@ -10,7 +10,7 @@ pfaucet.canadaeast.azurecontainer.io:8091 {
 	reverse_proxy http://localhost:8090
 }
 
-plumbersfaucet.ca {
+www.plumbersfaucet.ca {
 	reverse_proxy http://localhost:8080
 }
 
