@@ -1,7 +1,6 @@
 <script lang="ts">
 	export let section: Section;
 	export let vertical: boolean;
-	console.log(section);
 </script>
 
 {#if section.type === 'layout'}

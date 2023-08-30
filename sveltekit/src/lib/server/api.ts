@@ -26,6 +26,28 @@ const format_article = (article: Record) => {
 	}
 }
 
+const format_staff = (raw_staff: Record[]) => {
+	let formatted_staff: Staff[] = [];
+
+	raw_staff.forEach(staffer => {
+		formatted_staff.push(format_staffer(staffer));
+	});
+
+	return formatted_staff;
+}
+
+const format_staffer = (staffer: Record) => {
+	return {
+		name: staffer.name,
+		title: staffer.title,
+		degree: staffer.degree,
+		headshot: `${db_ip}/api/files/${staffer.collectionName}/${staffer.id}/${staffer.headshot}`,
+		hometown: staffer.hometown,
+		date_started: staffer.date_started,
+		description: staffer.description,
+	}
+}
+
 
 const format_issues = (raw_issues: ListResult<Record>) => {
 	let formatted_issues: Issue[] = [];
@@ -95,4 +117,9 @@ export async function get_article_by_id(id: string) {
 
 export async function get_first_issue() {
 	return await pb.collection('issues').getFirstListItem('special = \'firstIssue\'');
+}
+
+export async function get_staff() {
+	const result = await pb.collection('staff').getFullList();
+	return format_staff(result);
 }
