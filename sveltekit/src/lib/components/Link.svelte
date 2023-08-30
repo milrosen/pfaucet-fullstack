@@ -20,6 +20,7 @@
 		border: 3px solid var(--black);
 		margin: 3px;
 		padding: 3px;
+		overflow: hidden;
 		position: relative;
 		transition: color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1), box-shadow 0.2s linear;
 	}

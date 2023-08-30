@@ -13,3 +13,8 @@ type Staff = {
 	date_started: string,
 	description: string,
 }
+type Email = {
+	contact_name: string,
+	contact_email: string,
+	message: string
+}

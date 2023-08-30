@@ -1,6 +1,10 @@
-<script>
+<script lang="ts">
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
+
 	import Link from '$lib/components/Link.svelte';
 	import Complaints from '$lib/components/Complaints.svelte';
+	import Contact from './Contact.svelte';
 	let currentAnim = ' ';
 </script>
 
@@ -15,6 +19,13 @@
 		setTimeout(() => {
 			currentAnim = ' ';
 		}, 3500);
+	}}
+/>
+
+<Contact
+	showModal={$page.url.searchParams.has('contact')}
+	closeModal={() => {
+		goto(`?`, { noScroll: true });
 	}}
 />
 
@@ -36,7 +47,7 @@
 	<div class="button-container">
 		<Complaints />
 		<Link href={'/'} span={'Home'} />
-		<Link href={'/contact'} span={'Contact'} />
+		<Link href={''} span={'Contact'} onClick={() => goto('?contact', { noScroll: true })} />
 		<Link href={'/issues'} span={'Issues'} />
 	</div>
 </div>
