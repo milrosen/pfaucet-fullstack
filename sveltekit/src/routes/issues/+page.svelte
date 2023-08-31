@@ -1,27 +1,25 @@
-<script>
-	import Link from '$lib/components/Link.svelte';
+<script lang="ts">
 	export let data;
 
 	const newest_issue = JSON.parse(data.newest_issue);
-	const issues = JSON.parse(data.first_page);
+	const issues: Issue[] = JSON.parse(data.first_page);
 </script>
 
 <div>
 	<div class="first-issue">
-		<img src={newest_issue.thumbnail} alt="Test" />
+		<a href={`/issues/${newest_issue.id}`}>
+			<img src={newest_issue.thumbnail} alt="Test" />
+		</a>
 		<div class="buttons">
 			<p>{newest_issue.title}</p>
 			<p2>{newest_issue.blurb}</p2>
 			<p4>{newest_issue.paragraph}</p4>
 			<p3>{newest_issue.contributors}</p3>
-			<div class="download">
-				<Link href={newest_issue.pdf} span={'Download'} />
-			</div>
 		</div>
 	</div>
 	<div class="issues-grid">
 		{#each issues as issue}
-			<a class="issue" href={issue.pdf} target="_blank">
+			<a class="issue" href={`/issues/${issue.id}`}>
 				<div>
 					<img src={issue.thumbnail} alt={issue.title} class="issue-img" />
 				</div>

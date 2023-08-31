@@ -12,6 +12,7 @@
 **/scripts
 /_SSL
 **/pocketbase/data
+**/.vercel
 output.yaml
 
 

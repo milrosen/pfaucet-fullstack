@@ -9,7 +9,7 @@ export async function load() {
 	const newest_issue = await issues.shift();
 	return {
 		newest_issue: JSON.stringify({
-			pdf: newest_issue?.pdf,
+			id: newest_issue?.id,
 			thumbnail: newest_issue?.thumbnail,
 			title: newest_issue?.title,
 			contributors: newest_issue_meta.contributors,
@@ -18,6 +18,4 @@ export async function load() {
 		}),
 		first_page: JSON.stringify(issues),
 	};
-}  
-
-//  <img src="http://example.com/api/files/demo/1234abcd/test.png" alt="Test image" />
+}

@@ -59,9 +59,14 @@ const format_issues = (raw_issues: ListResult<Record>) => {
 	return formatted_issues;
 }
 
+export const get_pdf_url_from_article_id = async (id: string) => {
+	const record = await pb.collection('issues_content').getOne(id);
+	return `${db_ip}/api/files/${record.collectionName}/${record.id}/${record.issue_pdf}`;
+}
+
 const format_issue = (issue: Record) => {
 	return {
-		pdf: `${db_ip}/api/files/${issue.collectionName}/${issue.id}/${issue.issue_pdf}`,
+		id: issue.id,
 		thumbnail: `${db_ip}/api/files/${issue.collectionName}/${issue.id}/${issue.thumbnail}`,
 		title: issue.title,
 		date: issue.date,
