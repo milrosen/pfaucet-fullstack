@@ -45,10 +45,10 @@
 	</div>
 
 	<div class="button-container">
-		<Complaints />
 		<Link href={'/'} span={'Home'} />
 		<Link href={''} span={'Contact'} onClick={() => goto('?contact', { noScroll: true })} />
 		<Link href={'/issues'} span={'Issues'} />
+		<Complaints />
 	</div>
 </div>
 
@@ -119,7 +119,7 @@
 		flex: 1;
 		display: flex;
 		justify-content: right;
-		margin-bottom: 9px;
+		gap: 1rem;
 	}
 	.link {
 		height: 100%;
@@ -140,12 +140,12 @@
 			height: 2.5rem;
 		}
 		.drop {
-			top: 40px;
-			left: 12px;
-			height: 15px;
+			top: 33px;
+			left: 19px;
+			height: 8px;
 		}
 		.square {
-			height: 40px;
+			height: 30px;
 			width: 30px;
 		}
 	}

@@ -8,7 +8,7 @@
 <div>
 	<div class="first-issue">
 		<a href={`/issues/${newest_issue.id}`}>
-			<img src={newest_issue.thumbnail} alt="Test" />
+			<img src={newest_issue.thumbnail} alt="Test" class="first-issue-img" />
 		</a>
 		<div class="buttons">
 			<p>{newest_issue.title}</p>
@@ -37,6 +37,7 @@
 		padding: 1em;
 		text-decoration: none;
 		color: var(--black);
+		min-width: 0;
 	}
 	.issue-img {
 		width: 100%;
@@ -47,15 +48,19 @@
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	}
 	.first-issue {
-		display: flex;
-		flex-direction: row;
-		gap: 1em;
-		margin: 3em;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+		padding-top: 3rem;
 	}
-	.download {
-		margin-top: auto;
-		margin-left: auto;
+	.first-issue > a {
+		min-width: 0;
 	}
+	.first-issue-img {
+		width: 100%;
+		object-fit: cover;
+	}
+
 	.buttons {
 		display: flex;
 		flex-direction: column;
@@ -84,17 +89,22 @@
 		display: inline-block;
 		margin-left: auto;
 		margin-right: auto;
+		transform-origin: center;
 	}
 	p3 {
 		opacity: 0.5;
 		font-size: 0.4rem;
 	}
-	p4 {
-		font-size: 1.5rem;
-		font-weight: lighter;
-		opacity: 0.8;
-		padding: 0.7rem;
-		letter-spacing: 1.2px;
-		text-align: center;
+
+	@media only screen and (max-width: 600px) {
+		.first-issue {
+			grid-template-columns: 1fr 0.3fr;
+		}
+		.issues-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+		p2 {
+			transform: scale(70%) translateY(-10px) rotate(-12.5deg);
+		}
 	}
 </style>
