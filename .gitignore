@@ -13,6 +13,8 @@
 /_SSL
 **/pocketbase/data
 **/.vercel
+**/studio
+**/.vscode
 output.yaml
 
 
