@@ -15,6 +15,8 @@
 			<p>{newest_issue.title}</p>
 			<p2>{newest_issue.blurb}</p2>
 			<p4>{newest_issue.paragraph}</p4>
+		</div>
+		<div class="contributors">
 			<h1>Contributors:</h1>
 			<h2>Editor-in-Chief</h2>
 			<h3>{contributers.editor_in_chief}</h3>
@@ -77,6 +79,8 @@
 	}
 	.first-issue > a {
 		min-width: 0;
+		grid-row-start: 1;
+		grid-row-end: 3;
 	}
 	.first-issue-img {
 		width: 100%;
@@ -121,6 +125,15 @@
 	@media only screen and (max-width: 600px) {
 		.first-issue {
 			grid-template-columns: 1fr 0.3fr;
+			grid-template-rows: 1fr 1fr;
+		}
+		.first-issue > a {
+			grid-row-start: 1;
+			grid-row-end: 3;
+		}
+		.contributors {
+			grid-column-start: 1;
+			grid-column-end: 3;
 		}
 		.issues-grid {
 			grid-template-columns: 1fr 1fr;
