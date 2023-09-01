@@ -5,7 +5,15 @@ type Issue = {
 	id: string, 
 	date: any
 }
-type First_Issue = { title: any; thumbnail: string; link: string; blurb: any; paragraph: any; meta?: any; authors: any}
+type First_Issue = { 
+	title: any; 
+	thumbnail: string; 
+	link: string; 
+	blurb: any; 
+	paragraph: any; 
+	meta?: any; 
+	authors: any
+}
 type Section = {
 	type: 'image'|'paragraph'|'title'|'layout';
 	content: string|Section[];

@@ -16,6 +16,13 @@
 		{#if cards.indexOf(card) == 1 || cards.indexOf(card) == 2} <Card {card} />{/if}
 	{/each}
 </div>
+
+<div class="call-to-action">
+	You can implement something already or not, but it will basically just say: <b
+		>“The Faucet is accepting submissions for its next issue: “The TOPIC Issue.”</b
+	> If you would like to submit any articles, art, or anything of comedic nature, please visit our Contact
+	page and send us what you’ve got!”
+</div>
 <div class="staff-grid">
 	{#each staff as staffer (staff.indexOf(staffer))}
 		<StaffCard staff={staffer} />
@@ -23,6 +30,10 @@
 </div>
 
 <style>
+	.call-to-action {
+		margin: 3rem;
+		font-size: large;
+	}
 	.articles-grid {
 		display: grid;
 		gap: 2px;

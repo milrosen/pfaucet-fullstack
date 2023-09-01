@@ -2,6 +2,7 @@ import PocketBase, { ListResult, Record } from 'pocketbase';
 import {
 	env
 } from '$env/dynamic/private';
+import type { s } from 'vitest/dist/types-198fd1d9';
 
 const format_articles = (raw_articles: ListResult<Record>) => {
 	let formatted_articles: Article[] = [];
@@ -71,6 +72,12 @@ const format_issue = (issue: Record) => {
 		title: issue.title,
 		date: issue.date,
 	}
+}
+
+export const get_contributors = async (issue_id: string) => {
+	const issue  = await pb.collection('issues').getOne(issue_id);
+	const contributers = await pb.collection('contributers').getOne(issue.contributors);
+	return contributers;
 }
 
 const pb = new PocketBase(env.DATABASE_IP);

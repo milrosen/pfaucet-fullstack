@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let card: Article;
+	export let card: First_Issue;
 </script>
 
 <div class="big-card">

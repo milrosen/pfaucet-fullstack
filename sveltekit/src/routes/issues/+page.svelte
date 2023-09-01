@@ -3,6 +3,7 @@
 
 	const newest_issue = JSON.parse(data.newest_issue);
 	const issues: Issue[] = JSON.parse(data.first_page);
+	const contributers = JSON.parse(data.contributers);
 </script>
 
 <div>
@@ -14,7 +15,17 @@
 			<p>{newest_issue.title}</p>
 			<p2>{newest_issue.blurb}</p2>
 			<p4>{newest_issue.paragraph}</p4>
-			<p3>{newest_issue.contributors}</p3>
+			<h1>Contributors:</h1>
+			<h2>Editor-in-Chief</h2>
+			<h3>{contributers.editor_in_chief}</h3>
+			<h2>Editors & Executives</h2>
+			<h3>{contributers.editors_and_executives.split(',').join('\n')}</h3>
+			<h2>Publications Director</h2>
+			<h3>{contributers.publications_director}</h3>
+			<h2>Writers</h2>
+			<h3>{contributers.writers.split(',').join('\n')}</h3>
+			<h2>Illustrators</h2>
+			<h3>{contributers.illustrators.split(',').join('\n')}</h3>
 		</div>
 	</div>
 	<div class="issues-grid">
@@ -33,6 +44,17 @@
 </div>
 
 <style>
+	h3 {
+		white-space: pre-line;
+		margin: 0;
+		margin-left: 3rem;
+	}
+
+	h2 {
+		margin: 0;
+		font-family: 'dimbo';
+		font-size: 2.5rem;
+	}
 	.issue {
 		padding: 1em;
 		text-decoration: none;
