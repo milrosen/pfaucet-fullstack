@@ -7,6 +7,7 @@ export async function load() {
 	let issue_meta = await get_first_issue();
 	let issue_content = await get_issue_by_id(issue_meta.issue);
 	const issues = await get_all_issues();
+	issues.shift();
 	const newest_issue_contributers = await get_contributors(issue_meta.id);
 	return {
 		newest_issue: JSON.stringify({
