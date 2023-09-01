@@ -129,3 +129,7 @@ export async function get_staff() {
 	const result = await pb.collection('staff').getFullList();
 	return format_staff(result);
 }
+
+export function format_cards() {
+
+}

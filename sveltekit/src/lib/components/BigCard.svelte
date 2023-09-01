@@ -48,7 +48,7 @@
 		border-width: 0px 2px;
 		padding: 0px 3px;
 		font-size: 1rem;
-		transform: rotate(-8deg) translateY(-6px);
+		transform: rotate(-5deg) translateY(-6px);
 		display: inline-block;
 	}
 	p3 {

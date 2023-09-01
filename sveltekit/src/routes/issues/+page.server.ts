@@ -12,7 +12,7 @@ export async function load() {
 			id: newest_issue?.id,
 			thumbnail: newest_issue?.thumbnail,
 			title: newest_issue?.title,
-			contributors: newest_issue_meta.contributors,
+			contributors: newest_issue_meta.authors,
 			blurb: newest_issue_meta.blurb,
 			paragraph: newest_issue_meta.paragraph,
 		}),

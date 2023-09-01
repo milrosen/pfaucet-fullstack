@@ -9,7 +9,7 @@
 		<p3>{card.authors.split(',')}</p3>
 	</a>
 	<div class="bg">
-		<img src={card.thumbnail} alt={card.title} />
+		<img src={card.thumbnail} alt={''} />
 	</div>
 </div>
 
@@ -29,6 +29,7 @@
 	p {
 		font-family: 'dimbo';
 		display: block;
+		text-align: center;
 		margin: 0;
 		padding: 0px 5px;
 		transform: translateY(-20px);
