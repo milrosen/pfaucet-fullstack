@@ -104,6 +104,7 @@
 		display: inline;
 	}
 	.container {
+		overflow: hidden;
 		position: sticky;
 		top: 0px;
 		padding-top: 8px;

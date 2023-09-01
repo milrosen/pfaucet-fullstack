@@ -51,7 +51,6 @@
 		z-index: 10;
 	}
 	span {
-		padding: 5px;
 		margin: 0 1rem;
 	}
 </style>

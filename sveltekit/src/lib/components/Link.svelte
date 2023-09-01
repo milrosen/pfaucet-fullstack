@@ -16,7 +16,4 @@
 		align-items: center;
 		color: var(--black);
 	}
-	span {
-		padding: 5px;
-	}
 </style>

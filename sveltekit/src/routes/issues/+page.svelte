@@ -125,15 +125,17 @@
 	@media only screen and (max-width: 600px) {
 		.first-issue {
 			grid-template-columns: 1fr 0.3fr;
-			grid-template-rows: 1fr 1fr;
+			grid-template-rows: 0.3fr 1fr;
 		}
 		.first-issue > a {
 			grid-row-start: 1;
-			grid-row-end: 3;
+			grid-row-end: 1;
 		}
 		.contributors {
 			grid-column-start: 1;
 			grid-column-end: 3;
+			grid-row-start: 2;
+			grid-row-end: 4;
 		}
 		.issues-grid {
 			grid-template-columns: 1fr 1fr;
