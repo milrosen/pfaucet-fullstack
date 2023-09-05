@@ -11,7 +11,15 @@
 </script>
 
 <div class="wrapper">
-	<embed type="application/pdf" src={data.pdf_url} width={innerWidth} height={innerHeight} />
+	<object
+		type="application/pdf"
+		data={data.pdf_url}
+		width={innerWidth}
+		height={innerHeight}
+		title={data.pdf_url}
+	>
+		<a href={data.pdf_url}>alt</a></object
+	>
 </div>
 
 <style>
