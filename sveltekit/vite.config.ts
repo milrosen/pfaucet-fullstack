@@ -10,4 +10,9 @@ export default defineConfig({
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	},
+	server: {
+		fs: {
+			allow: ['C:/Users/milto/Projects/node_modules/pdfjs-dist/build/pdf.worker.js']
+		}
+	}
 });
