@@ -4,7 +4,7 @@
 </script>
 
 {#if section.type === 'layout'}
-	<div class="layout-section" style="flex-direction: {vertical ? 'column' : 'row'};">
+	<div class="layout-section {vertical ? 'column' : 'vertical'}">
 		{#each section.content as subsection}
 			<svelte:self section={subsection} vertical={!vertical} />
 		{/each}
@@ -14,7 +14,7 @@
 		<img src={section.content.toString()} alt="a bad drawing" />
 	</div>
 {:else if section.type === 'paragraph'}
-	<div class="paragraph">
+	<div class="paragraph fulljustify">
 		{section.content}
 	</div>
 {:else if section.type === 'title'}
@@ -47,5 +47,32 @@
 		font-size: 1.7rem;
 		margin: 0 1rem;
 		text-indent: 3rem;
+	}
+	.fulljustify {
+		text-align: justify;
+	}
+	.fulljustify:after {
+		content: '';
+		display: inline-block;
+		max-width: 1px;
+	}
+	.vertical {
+		flex-direction: vertical;
+	}
+
+	.column {
+		flex-direction: column;
+	}
+	@media only screen and (max-width: 1050px) {
+		.vertical {
+			flex-direction: column;
+		}
+		.layout-section {
+			margin: 1rem 0;
+		}
+		.paragraph {
+			margin: 0;
+			font-size: 1.2rem;
+		}
 	}
 </style>

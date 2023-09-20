@@ -41,4 +41,12 @@
 		margin-right: 3rem;
 		width: fit-content;
 	}
+	@media only screen and (max-width: 1050px) {
+		.article {
+			max-width: 100%;
+		}
+		.article-body {
+			padding: 1rem;
+		}
+	}
 </style>

@@ -2,7 +2,6 @@ import PocketBase, { ListResult, Record } from 'pocketbase';
 import {
 	env
 } from '$env/dynamic/private';
-import type { s } from 'vitest/dist/types-198fd1d9';
 
 const format_articles = (raw_articles: ListResult<Record>) => {
 	let formatted_articles: Article[] = [];
@@ -80,8 +79,8 @@ export const get_contributors = async (issue_id: string) => {
 	return contributers;
 }
 
-const pb = new PocketBase(env.DATABASE_IP);
-//pb.collection('users').authWithPassword(env.PB_USERNAME, env.PB_PASSWORD);
+export const pb = new PocketBase(env.DATABASE_IP);
+pb.collection('users').authWithPassword(env.PB_USERNAME, env.PB_PASSWORD);
 
 
 export const db_ip = env.DATABASE_IP;
