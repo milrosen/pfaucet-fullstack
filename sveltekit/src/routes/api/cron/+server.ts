@@ -1,10 +1,15 @@
-import { json } from "@sveltejs/kit";
+import { build_ai_article } from '$lib/server/ai'
 
 export async function GET(request) {
-	const requestFromVercel = request.url.toString().match(/https:\/\/pfaucet-fullstack-[a-zA-Z0-9]+-miltonrosenbaum-mcgillca.vercel.app\/api\/cron/)
-	if (!requestFromVercel) {
-		return new Response('not from vercel', {status: 403});
+	const requestFromVercel = request.url.toString().match(/https:\/\/pfaucet-fullstack-[a-zA-Z0-9]{9}-miltonrosenbaum-mcgillca\.vercel\.app\/api\/cron/)
+	// if (!requestFromVercel) {
+	// 	return new Response('you shouldn\'t be here. it litchrally says cron in the url', {status: 403});
+	// }
+	try {
+		await build_ai_article();
+		return new Response("worked", {status: 200});
+	} catch(err) {
+		console.log(err);
+		return new Response("didnt work", {status: 500});	
 	}
-	console.log(JSON.stringify(request))
-	return new Response('yay!', {status: 200});
 }

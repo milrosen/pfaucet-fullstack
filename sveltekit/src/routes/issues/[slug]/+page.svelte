@@ -11,6 +11,7 @@
 	};
 </script>
 
+<!-- in practice, the ARIA role is not an issue cause there are also buttons, and the PdfViewer element is just built wrong -->
 <div class="wrapper" on:keydown={handleKeydown}>
 	<button class="nav prev" on:click={pdfViewer.prevPage()} />
 	<PdfViewer bind:this={pdfViewer} url={data.pdf_url} showBorder={false} />

@@ -136,6 +136,6 @@ export async function get_staff() {
 	return format_staff(result);
 }
 
-export function format_cards() {
-
+export async function post_article(articleContent: Section) {
+	// do something
 }
