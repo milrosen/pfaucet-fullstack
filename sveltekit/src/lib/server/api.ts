@@ -92,7 +92,7 @@ export const get_article_json = async(id: string) => {
 
 export async function get_articles(n: number) {
 	const result = await pb.collection('articles').getList(0, n, {
-		sort: '-authors',
+		sort: '-created',
 	});
 	return format_articles(result);
 }
@@ -136,6 +136,20 @@ export async function get_staff() {
 	return format_staff(result);
 }
 
-export async function post_article(articleContent: Section) {
-	// do something
+export async function post_article(articleContent: Section, articleMeta: Article) {
+	const content = {
+		"title": articleMeta.title,
+		"content": JSON.stringify(articleContent)
+	}
+	const contentRecord = await pb.collection('articles_content').create(content);
+	const meta = {
+		"title": articleMeta.title,
+		"authors": articleMeta.authors,
+		"blurb": articleMeta.blurb,
+		"content": contentRecord.id,
+		"paragraph": articleMeta.authors,
+		"date": "2022-01-01 10:00:00.123Z",
+		"issue": "online exclusive",
+	};
+	await pb.collection('articles').create(meta);
 }
