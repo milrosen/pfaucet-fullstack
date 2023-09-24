@@ -3,7 +3,7 @@ import {
 	env
 } from '$env/dynamic/private';
 
-export const pb = new PocketBase(env.DATABASE_IP);
+const pb = new PocketBase(env.DATABASE_IP);
 pb.collection('users').authWithPassword(env.PB_USERNAME, env.PB_PASSWORD);
 
 

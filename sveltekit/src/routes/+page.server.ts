@@ -1,4 +1,4 @@
-import { get_articles, get_first_issue, get_issue_by_id, get_staff, get_pdf_url_from_article_id } from "$lib/server/api";
+import { get_articles, get_first_issue, get_issue_by_id, get_staff } from "$lib/server/api";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
