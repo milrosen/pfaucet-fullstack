@@ -3,7 +3,6 @@ import OpenAI from "openai";
 import {
 	env
 } from '$env/dynamic/private';
-import fs from 'fs';
 
 const openai = new OpenAI({
   apiKey: env.OPENAI_API_KEY,
