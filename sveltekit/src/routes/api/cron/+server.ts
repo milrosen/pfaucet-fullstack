@@ -5,11 +5,5 @@ export async function GET(request) {
 	if (!requestFromVercel && import.meta.env.PROD) {
 		return new Response('you shouldn\'t be here. it litchrally says cron in the url', {status: 403});
 	}
-	try {
-		await build_ai_article();
-		return new Response("worked", {status: 200});
-	} catch(err) {
-		console.log(err);
-		return new Response(JSON.stringify(err), {status: 500});	
-	}
+	await build_ai_article();
 }
