@@ -3,6 +3,10 @@ import {
 	env
 } from '$env/dynamic/private';
 
+export const pb = new PocketBase(env.DATABASE_IP);
+pb.collection('users').authWithPassword(env.PB_USERNAME, env.PB_PASSWORD);
+
+
 const format_articles = (raw_articles: ListResult<Record>) => {
 	let formatted_articles: Article[] = [];
 
@@ -79,9 +83,6 @@ export const get_contributors = async (issue_id: string) => {
 	return contributers;
 }
 
-export const pb = new PocketBase(env.DATABASE_IP);
-pb.collection('users').authWithPassword(env.PB_USERNAME, env.PB_PASSWORD);
-
 
 export const db_ip = env.DATABASE_IP;
 
@@ -152,4 +153,15 @@ export async function post_article(articleContent: Section, articleMeta: Article
 		"issue": "online exclusive",
 	};
 	await pb.collection('articles').create(meta);
+}
+
+export async function get_ai_config() {
+	const configRecord = await pb.collection('ai_configuration').getOne("g0b8k92i8nkufo6");
+	return {
+		system_prompt: configRecord.system_prompt,
+		title: configRecord.title,
+		blurb: configRecord.blurb,
+		author: configRecord.author,
+		paragraph: configRecord.paragraph
+	}
 }
