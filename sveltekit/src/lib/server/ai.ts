@@ -3,6 +3,7 @@ import OpenAI from "openai";
 import {
 	env
 } from '$env/dynamic/private';
+import fs from 'fs';
 
 const openai = new OpenAI({
   apiKey: env.OPENAI_API_KEY,
@@ -33,6 +34,14 @@ async function get_text_from_openai(proompt: string, system_proompt: string) {
 	return text
 }
 
+async function  get_image_from_openAI(proompt: string) {
+
+	const image = await openai.images.generate({ prompt :"a political cartoon for an article with the title: " + proompt });
+	const url = image.data[0].url as unknown as URL;
+	let file = await fetch(url).then(r => r.blob()).then(blobFile => new File([blobFile], "fileNameGoesHere", { type: "image/png" }));
+	return file;
+}
+
 function format_ai_text(text: string, title: string): Section {
 	let body: Section[] = [
 		{
@@ -59,7 +68,8 @@ function format_ai_text(text: string, title: string): Section {
 
 export async function build_ai_article() {
 	const {title, system_prompt, blurb, author, paragraph} = await get_ai_config();
-	let text = await get_text_from_openai(title, system_prompt);
+	const image = await get_image_from_openAI(title);
+	const text = await get_text_from_openai(title, system_prompt);
 	if (text == null) throw "error in openAIapi";
 	let article_body = format_ai_text(text, title);
 	let article_meta = {
@@ -72,5 +82,5 @@ export async function build_ai_article() {
 		content: '',
 		authors: author
 	}
-	await post_article(article_body, article_meta);
+	await post_article(article_body, article_meta, image);
 }

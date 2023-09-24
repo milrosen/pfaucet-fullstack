@@ -137,7 +137,7 @@ export async function get_staff() {
 	return format_staff(result);
 }
 
-export async function post_article(articleContent: Section, articleMeta: Article) {
+export async function post_article(articleContent: Section, articleMeta: Article, image: File) {
 	const content = {
 		"title": articleMeta.title,
 		"content": JSON.stringify(articleContent)
@@ -152,7 +152,20 @@ export async function post_article(articleContent: Section, articleMeta: Article
 		"date": articleMeta.date,
 		"issue": "online exclusive",
 	};
-	await pb.collection('articles').create(meta);
+	const metaRecord = await pb.collection('articles').create(meta);
+
+	const formData = new FormData();
+	formData.append('thumbnail', image)
+	const metaRecordWithImage = await pb.collection('articles').update(metaRecord.id, formData);
+	const filename = metaRecordWithImage.thumbnail;
+	const url = pb.files.getUrl(metaRecordWithImage, filename);
+	articleContent.content.unshift({
+		type: 'image',
+		content: url,
+	});
+	await pb.collection('articles_content').update(contentRecord.id, {
+		content: JSON.stringify(articleContent),
+	})
 }
 
 export async function get_ai_config() {
