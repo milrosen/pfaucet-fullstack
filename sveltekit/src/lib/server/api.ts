@@ -149,7 +149,7 @@ export async function post_article(articleContent: Section, articleMeta: Article
 		"blurb": articleMeta.blurb,
 		"content": contentRecord.id,
 		"paragraph": articleMeta.authors,
-		"date": "2022-01-01 10:00:00.123Z",
+		"date": articleMeta.date,
 		"issue": "online exclusive",
 	};
 	await pb.collection('articles').create(meta);
