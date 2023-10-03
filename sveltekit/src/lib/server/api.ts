@@ -4,7 +4,11 @@ import {
 } from '$env/dynamic/private';
 
 const pb = new PocketBase(env.DATABASE_IP);
-pb.collection('users').authWithPassword(env.PB_USERNAME, env.PB_PASSWORD);
+
+export const login = async () => {
+	await pb.collection('users').authWithPassword(env.PB_USERNAME, env.PB_PASSWORD);
+}
+
 
 
 const format_articles = (raw_articles: ListResult<Record>) => {

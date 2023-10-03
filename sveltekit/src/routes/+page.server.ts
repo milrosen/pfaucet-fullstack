@@ -1,7 +1,8 @@
-import { get_articles, get_first_issue, get_issue_by_id, get_staff } from "$lib/server/api";
+import { get_articles, get_first_issue, get_issue_by_id, get_staff, login } from "$lib/server/api";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
+	await login();
 	let articles = await get_articles(2);
 	let issue_meta = await get_first_issue();
 	let issue_content = await get_issue_by_id(issue_meta.issue)
