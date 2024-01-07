@@ -1,30 +1,23 @@
-import PocketBase, { ListResult, Record } from 'pocketbase';
-import {
-	env
-} from '$env/dynamic/private';
+import type { Article, Database, Staff, Issue, Section } from '$lib/ambient'
+import { createClient } from '@supabase/supabase-js'
+const supabaseUrl = 'https://eszkdgkkhqcjozvwrhnm.supabase.co'
+import { PUBLIC_SUPABASE_KEY } from '$env/static/public'
+const supabase = createClient(supabaseUrl,  PUBLIC_SUPABASE_KEY)
 
-const pb = new PocketBase(env.DATABASE_IP);
-
-export const login = async () => {
-	await pb.collection('users').authWithPassword(env.PB_USERNAME, env.PB_PASSWORD);
-}
-
-
-
-const format_articles = (raw_articles: ListResult<Record>) => {
+const format_articles = (raw_articles: any[]) => {
 	let formatted_articles: Article[] = [];
 
-	raw_articles.items.forEach(article => {
+	raw_articles.forEach(article => {
 		formatted_articles.push(format_article(article));
 	});
 
 	return formatted_articles;
 }
 
-const format_article = (article: Record) => {
+const format_article = (article: { title: any; collectionName: any; id: any; thumbnail: any; blurb: any; paragraph: any; content: any; date: any; authors: any }) => {
 	return {
 		title: article.title,
-		thumbnail: `${db_ip}/api/files/${article.collectionName}/${article.id}/${article.thumbnail}`,
+		thumbnail: get_file_url('articles_thumbnail', article.thumbnail),
 		link: `articles/${article.id}`,
 		blurb: article.blurb,
 		paragraph: article.paragraph,
@@ -34,7 +27,7 @@ const format_article = (article: Record) => {
 	}
 }
 
-const format_staff = (raw_staff: Record[]) => {
+const format_staff = (raw_staff: any[]) => {
 	let formatted_staff: Staff[] = [];
 
 	raw_staff.forEach(staffer => {
@@ -44,12 +37,12 @@ const format_staff = (raw_staff: Record[]) => {
 	return formatted_staff;
 }
 
-const format_staffer = (staffer: Record) => {
+const format_staffer = (staffer: { name: any; title: any; degree: any; collectionName: any; id: any; headshot: any; hometown: any; date_started: any; description: any }) => {
 	return {
 		name: staffer.name,
 		title: staffer.title,
 		degree: staffer.degree,
-		headshot: `${db_ip}/api/files/${staffer.collectionName}/${staffer.id}/${staffer.headshot}`,
+		headshot: get_file_url('headshots', staffer.headshot),
 		hometown: staffer.hometown,
 		date_started: staffer.date_started,
 		description: staffer.description,
@@ -57,128 +50,130 @@ const format_staffer = (staffer: Record) => {
 }
 
 
-const format_issues = (raw_issues: ListResult<Record>) => {
+const format_issues = (raw_issues: any[]) => {
 	let formatted_issues: Issue[] = [];
 
-	raw_issues.items.forEach(issue => {
+	raw_issues.forEach(issue => {
 		formatted_issues.push(format_issue(issue))
 	});
 
 	return formatted_issues;
 }
 
-export const get_pdf_url_from_article_id = async (id: string) => {
-	const record = await pb.collection('issues_content').getOne(id);
-	return `${db_ip}/api/files/${record.collectionName}/${record.id}/${record.issue_pdf}`;
+const get_file_url = (bucket: string, filename: string) => {
+	const { data } = supabase
+		.storage
+		.from('open')
+		.getPublicUrl(`${bucket}/${filename}`)
+	return data.publicUrl
 }
 
-const format_issue = (issue: Record) => {
+
+export const get_pdf_url_from_issue_content_id = async (id: string) => {
+	let { data: issues_content, error } = await supabase
+		.from('issues_content')
+		.select('id, issue_pdf')
+		.eq('id', id);
+
+	const issue_pdf = issues_content ? issues_content[0].issue_pdf as string : '';
+	
+	return get_file_url('issues_pdf', issue_pdf)
+}
+const format_issue = (issue: { id: any; collectionName: any; thumbnail: any; title: any; date: any }) => {
 	return {
 		id: issue.id,
-		thumbnail: `${db_ip}/api/files/${issue.collectionName}/${issue.id}/${issue.thumbnail}`,
+		thumbnail: get_file_url('issues_thumbnail', issue.thumbnail),
 		title: issue.title,
 		date: issue.date,
 	}
 }
 
 export const get_contributors = async (issue_id: string) => {
-	const issue  = await pb.collection('issues').getOne(issue_id);
-	const contributers = await pb.collection('contributers').getOne(issue.contributors);
-	return contributers;
+	const {data: issue} = await supabase.from('issues').select('id, contributors').eq('id', issue_id).limit(1).single();
+	const { data: contributors } = await supabase.from('contributers').select().eq('id', issue!.contributors).limit(1).single()
+	return contributors;
 }
 
 
-export const db_ip = env.DATABASE_IP;
+export const db_ip = supabaseUrl
 
 export const get_article_json = async(id: string) => {
-	const record = await pb.collection('articles_content').getOne(id);
+	const { data: record } = await supabase.from('articles_content').select().eq('id', id).limit(1).single()
 	return record.content;
 } 
 
 export async function get_articles(n: number) {
-	const result = await pb.collection('articles').getList(0, n, {
-		sort: '-created',
-	});
+	const { data: result } = await supabase.from('articles').select().order('date', { ascending: false }).limit(n)
+	if (!!!result) return;
 	return format_articles(result);
 }
 
-export async function get_db_test() {
-	const result = await pb.collection('test').getFullList();
- 	return result[0]?.test_field;
-}
-
-export async function get_issues(first: number, last: number) {
-	const result = await pb.collection('issues').getList(0, last+first, {
-		sort: '-date',
-	});
-	const formatted_result = format_issues(result);
-	return formatted_result.slice(first, last);
-}
-
 export async function get_all_issues() {
-	const result = await pb.collection('issues_content').getList(0, 72, {
-		sort: '-date',
-	});
+	
+	const {data: result } = await supabase.from('issues_content').select().order('date', { ascending: false });
+	if (!!!result) return;
 	return format_issues(result);
 }
 
 export async function get_issue_by_id(id: string) {
-	const result = await pb.collection('issues_content').getOne(id);
+	const { data: result } = await supabase.from('issues_content').select().eq('id', id).limit(1).single()
 	return format_issue(result);
 }
 
 export async function get_article_by_id(id: string) {
-	const result = await pb.collection('articles').getOne(id);
+	const { data: result } = await supabase.from('articles').select().eq('id', id).limit(1).single()
 	return format_article(result);
 }
 
 export async function get_first_issue() {
-	return await pb.collection('issues').getFirstListItem('special = \'firstIssue\'');
+	const { data: result } = await supabase.from('issues').select().eq('special', 'firstIssue').limit(1).single()
+	return result
 }
 
 export async function get_staff() {
-	const result = await pb.collection('staff').getFullList();
+	const {data: result } = await supabase.from('staff').select();
+	if (!!!result) return;
 	return format_staff(result);
 }
 
-export async function post_article(articleContent: Section, articleMeta: Article, image: File) {
-	const content = {
-		"title": articleMeta.title,
-		"content": JSON.stringify(articleContent)
-	}
-	const contentRecord = await pb.collection('articles_content').create(content);
-	const meta = {
-		"title": articleMeta.title,
-		"authors": articleMeta.authors,
-		"blurb": articleMeta.blurb,
-		"content": contentRecord.id,
-		"paragraph": articleMeta.authors,
-		"date": articleMeta.date,
-		"issue": "online exclusive",
-	};
-	const metaRecord = await pb.collection('articles').create(meta);
+// export async function post_article(articleContent: Section, articleMeta: Article, image: File) {
+// 	const content = {
+// 		"title": articleMeta.title,
+// 		"content": JSON.stringify(articleContent)
+// 	}
+// 	const contentRecord = await pb.collection('articles_content').create(content);
+// 	const meta = {
+// 		"title": articleMeta.title,
+// 		"authors": articleMeta.authors,
+// 		"blurb": articleMeta.blurb,
+// 		"content": contentRecord.id,
+// 		"paragraph": articleMeta.authors,
+// 		"date": articleMeta.date,
+// 		"issue": "online exclusive",
+// 	};
+// 	const metaRecord = await pb.collection('articles').create(meta);
 
-	const formData = new FormData();
-	formData.append('thumbnail', image)
-	const metaRecordWithImage = await pb.collection('articles').update(metaRecord.id, formData);
-	const filename = metaRecordWithImage.thumbnail;
-	const url = pb.files.getUrl(metaRecordWithImage, filename);
-	articleContent.content.unshift({
-		type: 'image',
-		content: url,
-	});
-	await pb.collection('articles_content').update(contentRecord.id, {
-		content: JSON.stringify(articleContent),
-	})
-}
+// 	const formData = new FormData();
+// 	formData.append('thumbnail', image)
+// 	const metaRecordWithImage = await pb.collection('articles').update(metaRecord.id, formData);
+// 	const filename = metaRecordWithImage.thumbnail;
+// 	const url = pb.files.getUrl(metaRecordWithImage, filename);
+// 	articleContent.content.unshift({
+// 		type: 'image',
+// 		content: url,
+// 	});
+// 	await pb.collection('articles_content').update(contentRecord.id, {
+// 		content: JSON.stringify(articleContent),
+// 	})
+// }
 
-export async function get_ai_config() {
-	const configRecord = await pb.collection('ai_configuration').getOne("g0b8k92i8nkufo6");
-	return {
-		system_prompt: configRecord.system_prompt,
-		title: configRecord.title,
-		blurb: configRecord.blurb,
-		author: configRecord.author,
-		paragraph: configRecord.paragraph
-	}
-}
+// export async function get_ai_config() {
+// 	const configRecord = await pb.collection('ai_configuration').getOne("g0b8k92i8nkufo6");
+// 	return {
+// 		system_prompt: configRecord.system_prompt,
+// 		title: configRecord.title,
+// 		blurb: configRecord.blurb,
+// 		author: configRecord.author,
+// 		paragraph: configRecord.paragraph
+// 	}
+// }

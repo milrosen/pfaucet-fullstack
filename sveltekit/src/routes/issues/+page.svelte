@@ -1,6 +1,7 @@
 <script lang="ts">
+	import type { Issue } from '$lib/ambient.js';
 	export let data;
-
+	
 	const newest_issue = JSON.parse(data.newest_issue);
 	const issues: Issue[] = JSON.parse(data.first_page);
 	const contributers = JSON.parse(data.contributers);
