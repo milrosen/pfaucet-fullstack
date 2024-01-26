@@ -68,6 +68,6 @@
 	img {
 		width: 100%;
 		object-fit: cover;
-		transform: scale(110%) translateY(-30%);
+		transform: translateY(-2%);
 	}
 </style>
