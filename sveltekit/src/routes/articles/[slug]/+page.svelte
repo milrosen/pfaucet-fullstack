@@ -23,6 +23,7 @@
 		margin: 1rem;
 		max-width: calc(100vw - (24px * 2 + 8px) - 300px);
 		color: var(--black);
+		padding: 3rem;
 	}
 	.title-section {
 		font-family: 'dimbo';
@@ -49,6 +50,9 @@
 		}
 		h1 {
 			font-size: 2rem;
+		}
+		.article {
+			padding: 0;
 		}
 	}
 </style>
