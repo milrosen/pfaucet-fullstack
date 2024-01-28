@@ -20,7 +20,7 @@
 
 <style>
 	.article {
-		margin-left: 1rem;
+		margin: 1rem;
 		max-width: calc(100vw - (24px * 2 + 8px) - 300px);
 		color: var(--black);
 	}
@@ -29,7 +29,6 @@
 	}
 	.article-body {
 		padding: 0 3rem;
-		margin-bottom: 25rem;
 	}
 	h1 {
 		font-size: 3.5rem;
@@ -47,6 +46,9 @@
 		}
 		.article-body {
 			padding: 1rem;
+		}
+		h1 {
+			font-size: 2rem;
 		}
 	}
 </style>

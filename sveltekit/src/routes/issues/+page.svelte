@@ -7,7 +7,7 @@
 	const contributers = JSON.parse(data.contributers);
 </script>
 
-<div>
+<main>
 	<div class="first-issue">
 		<a href={`/issues/${newest_issue.id}`}>
 			<img src={newest_issue.thumbnail} alt="Test" class="first-issue-img" />
@@ -44,9 +44,12 @@
 			</a>
 		{/each}
 	</div>
-</div>
+</main>
 
 <style>
+	main {
+		margin: 1rem;
+	}
 	h3 {
 		white-space: pre-line;
 		margin: 0;
@@ -118,10 +121,6 @@
 		margin-right: auto;
 		transform-origin: center;
 	}
-	p3 {
-		opacity: 0.5;
-		font-size: 0.4rem;
-	}
 
 	@media only screen and (max-width: 600px) {
 		.first-issue {
@@ -137,6 +136,13 @@
 			grid-column-end: 3;
 			grid-row-start: 2;
 			grid-row-end: 4;
+		}
+		h2 {
+			text-align: center;
+		}
+		h3 {
+			text-align: center;
+			margin: 0
 		}
 		.issues-grid {
 			grid-template-columns: 1fr 1fr;

@@ -64,14 +64,14 @@
 		background-color: var(--cream);
 		top: 0;
 		left: 0;
-		height: 55.5px;
+		height: 55px;
 		width: 50px;
 	}
 	.drop {
 		position: fixed;
 		fill: var(--black);
-		top: 55px;
-		left: 28px;
+		top: 54px;
+		left: 22px;
 		height: 15px;
 		transform-origin: top center;
 		z-index: 1;
@@ -105,7 +105,7 @@
 	}
 	.container {
 		overflow: hidden;
-		position: sticky;
+		position: fixed;
 		top: 0px;
 		padding-top: 8px;
 		background: var(--cream);
@@ -142,7 +142,7 @@
 		}
 		.drop {
 			top: 33px;
-			left: 19px;
+			left: 12px;
 			height: 8px;
 		}
 		.square {

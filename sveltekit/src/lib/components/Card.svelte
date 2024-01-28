@@ -43,7 +43,7 @@
 		border-style: solid;
 		border-width: 0px 2px;
 		padding: 0px 3px;
-		font-size: 1rem;
+		font-size: .7rem;
 		transform: rotate(-8deg) translateY(-15px);
 	}
 	p3 {
