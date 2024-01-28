@@ -1,38 +1,17 @@
 <script lang="ts">
-	import PdfViewer from 'svelte-pdf';
-
+	export const ssr = false
+	
 	export let data;
-
-	let pdfViewer: PdfViewer;
-	const handleKeydown = (e: KeyboardEvent) => {
-		e.preventDefault;
-		if (e.code == 'ArrowRight') pdfViewer.nextPage();
-		if (e.code == 'ArrowLeft') pdfViewer.prevPage();
-	};
 </script>
 
-<!-- in practice, the ARIA role is not an issue cause there are also buttons, and the PdfViewer element is just built wrong -->
-<div class="wrapper" on:keydown={handleKeydown}>
-	<button class="nav prev" on:click={pdfViewer.prevPage()} />
-	<PdfViewer bind:this={pdfViewer} url={data.pdf_url} showBorder={false} />
-	<button class="nav next" on:click={pdfViewer.nextPage()} />
-</div>
+<object title="issuePdf" data={data.pdf_url} class="document"/>
 
 <style>
-	.nav {
-		position: absolute;
-		height: 100%;
-		width: 5rem;
-		background-color: transparent;
-		border: none;
-	}
-	.wrapper {
-		position: relative;
-		width: 100%;
-	}
-	.next {
-		top: 0;
-		right: 0;
-		width: 70%;
+	.document {
+		max-width: 50rem;
+		width: 100vw;
+		height: 100vh;
+		display: block;
+		margin: 0 auto 0 auto;
 	}
 </style>
