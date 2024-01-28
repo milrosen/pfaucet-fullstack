@@ -1,8 +1,7 @@
 import type { Article, Database, Staff, Issue, Section } from '$lib/ambient'
 import { createClient } from '@supabase/supabase-js'
-const supabaseUrl = 'https://eszkdgkkhqcjozvwrhnm.supabase.co'
-import { PUBLIC_SUPABASE_KEY } from '$env/static/public'
-const supabase = createClient(supabaseUrl,  PUBLIC_SUPABASE_KEY)
+import { PUBLIC_SUPABASE_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public'
+export const supabase = createClient(PUBLIC_SUPABASE_URL,  PUBLIC_SUPABASE_KEY)
 
 const format_articles = (raw_articles: any[]) => {
 	let formatted_articles: Article[] = [];
@@ -95,7 +94,7 @@ export const get_contributors = async (issue_id: string) => {
 }
 
 
-export const db_ip = supabaseUrl
+export const db_ip = PUBLIC_SUPABASE_URL
 
 export const get_article_json = async(id: string) => {
 	const { data: record } = await supabase.from('articles_content').select().eq('id', id).limit(1).single()

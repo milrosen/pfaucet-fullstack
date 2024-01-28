@@ -3,7 +3,10 @@
 declare global {
 	namespace App {
 		// interface Error {}
-		// interface Locals {}
+		interface Locals {
+			supabase: any
+			getSession: Session
+		}
 		// interface PageData {}
 		// interface Platform {}
 	}
