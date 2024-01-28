@@ -17,7 +17,7 @@
 	:global(body) {
 		background-color: white;
 		margin: 0;
-		box-shadow: 50vh 500px 20px 50px inset white, 0px -50px white;
+		box-shadow: 100vw 0px inset white, 0px -50px white;
 		margin-top: 5rem;
 		background-color: #282a28;
 	}
