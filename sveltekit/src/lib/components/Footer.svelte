@@ -41,7 +41,7 @@
 		width: 100%;
 		color: lightslategray;
 		background-color: var(--black);
-		box-shadow: 0px 50px #282a28;
+		
 		position: absolute;
 		left: 0px;
 	}

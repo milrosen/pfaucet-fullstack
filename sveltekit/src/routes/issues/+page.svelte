@@ -66,6 +66,7 @@
 		text-decoration: none;
 		color: var(--black);
 		min-width: 0;
+		overflow: hidden;
 	}
 	.issue-img {
 		width: 100%;
