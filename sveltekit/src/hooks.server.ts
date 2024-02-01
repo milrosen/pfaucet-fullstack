@@ -13,17 +13,11 @@ export const handle: Handle = async ({ event, resolve }) => {
        * will replicate previous/standard behaviour (https://kit.svelte.dev/docs/types#public-types-cookies)
        */
       set: (key, value, options) => {
-<<<<<<< HEAD
+
         event.cookies.set(key, value, { ...options, path: '/admin' })
       },
       remove: (key, options) => {
         event.cookies.delete(key, { ...options, path: '/admin' })
-=======
-        event.cookies.set(key, value, { ...options, path: '/' })
-      },
-      remove: (key, options) => {
-        event.cookies.delete(key, { ...options, path: '/' })
->>>>>>> parent of 8556518 (whatever x 2)
       },
     },
   })
