@@ -8,8 +8,8 @@ export const load: PageServerLoad = async (event) => {
 	} = event;
 
     let data = await getSession()
-    if (data?.user.role != 'authenticated') {
-        throw redirect(302, '/admin/login');
+    if (data === null) {
+        console.log(data)
     }
 }
 
