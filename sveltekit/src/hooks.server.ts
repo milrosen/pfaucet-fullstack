@@ -13,10 +13,10 @@ export const handle: Handle = async ({ event, resolve }) => {
        * will replicate previous/standard behaviour (https://kit.svelte.dev/docs/types#public-types-cookies)
        */
       set: (key, value, options) => {
-        event.cookies.set(key, value, { ...options, path: '/admin' })
+        event.cookies.set(key, value, { ...options, path: '' })
       },
       remove: (key, options) => {
-        event.cookies.delete(key, { ...options, path: '/admin' })
+        event.cookies.delete(key, { ...options, path: '' })
       },
     },
   })
