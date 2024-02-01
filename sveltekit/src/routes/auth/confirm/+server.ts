@@ -13,7 +13,7 @@ export const GET = async (event: { url: any; locals: { supabase: any; }; }) => {
     const { data, error } = await supabase.auth.verifyOtp({ token_hash, type });
     if (!error) {
       console.log(data)
-      // supabase.auth.setSession(data)
+      supabase.auth.setSession(data.session)
       throw redirect(303, `/${next.slice(1)}`);
     }
   }
