@@ -10,6 +10,7 @@ export const load: PageServerLoad = async (event) => {
     let data = await getSession()
     if (data === null) {
         console.log(data)
+        throw redirect(302, '/admin/login')
     }
 }
 
