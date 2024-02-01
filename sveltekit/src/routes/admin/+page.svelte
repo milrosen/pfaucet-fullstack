@@ -1,4 +1,5 @@
-<script>import { enhance } from '$app/forms';</script>
+<script>import { enhance } from '$app/forms';
+</script>
 
 <form method="POST" action="?/uploadIssue" use:enhance>
     <h1> Add New Issue</h1>
