@@ -18,7 +18,7 @@
 
         const { error } = await supabase.auth.signInWithOtp({
             email: email,
-            options: {shouldCreateUser: true},
+            options: {shouldCreateUser: false},
         }) 
     }
   </script>
