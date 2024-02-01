@@ -18,6 +18,12 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
         const cookie = parse(document.cookie)
         return cookie[key]
       },
+      set: (key, value, options) => {
+        event.cookies.set(key, value, { ...options, path: '' })
+      },
+      remove: (key, options) => {
+        event.cookies.delete(key, { ...options, path: '' })
+      },
     },
   })
 
