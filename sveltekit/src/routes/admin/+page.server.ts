@@ -1,13 +1,26 @@
 import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "../$types";
+import { add_issue } from "$lib/server/api";
 
 export const load: PageServerLoad = async (event) => {
     const {
-		url,
-		locals: { getSession }
+		locals: { getSession, supabase }
 	} = event;
 
-    if (await getSession() == null) {
+    let data = await getSession()
+    if (data?.user.role != 'authenticated') {
         throw redirect(302, '/admin/login');
     }
 }
+
+/** @type {import('./$types').Actions} */
+export const actions = {
+	uploadIssue: async ({ request }) => {
+		let formData = await request.formData()
+        add_issue({
+            title: formData.get('issue name') as string,
+            blurb: formData.get('blurb') as string,
+            paragraph: formData.get('paragraph') as string,
+        }, formData.get('thumbnail'), formData.get('pdf'))
+	}
+};

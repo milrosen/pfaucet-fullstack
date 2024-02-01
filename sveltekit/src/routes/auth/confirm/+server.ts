@@ -12,7 +12,8 @@ export const GET = async (event: { url: any; locals: { supabase: any; }; }) => {
   if (token_hash && type) {
     const { data, error } = await supabase.auth.verifyOtp({ token_hash, type });
     if (!error) {
-      supabase.auth.setSession(data)
+      // supabase.auth.setSession(data)
+      console.log(data)
       throw redirect(303, `/${next.slice(1)}`);
     }
   }

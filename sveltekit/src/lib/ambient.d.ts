@@ -14,6 +14,12 @@ type First_Issue = {
 	meta?: any; 
 	authors: any
 }
+type Add_Issue = {
+  title: string;
+  blurb: string;
+  paragraph: string;
+}
+
 type Section = {
 	type: 'image'|'paragraph'|'title'|'layout';
 	content: string|Section[];

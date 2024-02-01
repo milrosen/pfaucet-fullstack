@@ -1,6 +1,7 @@
-import type { Article, Database, Staff, Issue, Section } from '$lib/ambient'
+import type { Article, Database, Staff, Issue, Section, Add_Issue } from '$lib/ambient'
 import { createClient } from '@supabase/supabase-js'
 import { PUBLIC_SUPABASE_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public'
+import { data } from '../../routes/+page.svelte'
 export const supabase = createClient(PUBLIC_SUPABASE_URL,  PUBLIC_SUPABASE_KEY)
 
 const format_articles = (raw_articles: any[]) => {
@@ -134,6 +135,50 @@ export async function get_staff() {
 	if (!!!result) return;
 	return format_staff(result);
 }
+
+export async function add_issue(issue: Add_Issue, thumbnail: File, pdf: File) {
+	let r1 = (Math.random() + 1).toString(36).substring(7);
+	let r2 = (Math.random() + 1).toString(36).substring(7);
+	let date = new Date(Date.now()).toISOString()
+	let {error: e1, data} = await supabase.from('issues')
+	.insert({
+		id: r1,
+		blurb: issue.blurb,
+		created: date,
+		issue: r2,
+		paragraph: issue.paragraph,
+		special: 'firstIssue',
+		contributors: "y4ndc815cdp1vqs"
+	})
+	if (e1) {console.log(e1, "error from adding to issues")}
+	let {error:e4} = await supabase.from('issues_content')
+	.insert({
+		issue_pdf: pdf.name,
+		id: r2,
+		title: issue.title,
+		date: date,
+		thumbnail: thumbnail.name
+	})	
+	if (e4) {console.log(e4, "error from adding to issues_content")}
+	let {error: e2} = await supabase
+  		.storage
+  		.from('open')
+  		.upload(`issues_pdf/${pdf.name}`, pdf, {
+    		cacheControl: '3600',
+    		upsert: false
+  		}
+	)
+	if (e2) {console.log(e2, "error adding file")}
+	let {error: e3} = await supabase
+  		.storage
+  		.from('open')
+  		.upload(`issues_thumbnail/${thumbnail.name}`, thumbnail, {
+    		cacheControl: '3600',
+    		upsert: false
+  		}
+	)
+	if (e3) {console.log(e3, "error adding thumbnail")}
+} 
 
 // export async function post_article(articleContent: Section, articleMeta: Article, image: File) {
 // 	const content = {
